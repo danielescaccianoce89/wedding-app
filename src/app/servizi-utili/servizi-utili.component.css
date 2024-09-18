@@ -1,0 +1,27 @@
+img {
+    vertical-align: middle
+}
+
+.text-container {
+    display: inline-block;
+    width: calc(100% - 60px);
+    margin-left: 10px;
+    white-space: normal;
+    vertical-align: middle
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 1rem;
+}
+
+.imgs-servizi {
+    max-height: 25vh !important;
+    max-width: 100%;
+    height: auto;
+}
+
+.box-inline {
+    display: inline-block;
+    margin: 45px;
+}

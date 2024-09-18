@@ -1,0 +1,22 @@
+.box-countdown {
+    display: inline-block;
+    border: 2px solid;
+    margin: 10px;
+    background-color: rgb(243, 217, 70);
+    border-radius: 9px;
+}
+
+.elegant {
+    font-family: 'Meldina', sans-serif;
+    /* font-family: "Amsterdam Four_ttf"; */
+    font-weight: bold;
+}
+
+.padding-horizontal {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.padding-vertical {
+    padding-top: 10px;
+}

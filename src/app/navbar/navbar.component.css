@@ -1,0 +1,63 @@
+.margined {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.nav-item a {
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+        font-weight: bold;
+        text-decoration: underline;
+    }
+}
+
+.nav-item-selected {
+    transform: scale(1.1);
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    margin-right: 10px !important;
+}
+
+nav {
+    background-color: rgb(255, 197, 36) !important;
+    /*background-image: url('/img/background.png');*/
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    text-align: center;
+    position:fixed;
+    width: 100%;
+}
+
+#navbarSupportedContent {
+    margin-left: 10px;
+}
+
+.nav-item {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-center {
+    text-align: center;
+}
+
+/* .toogler-btn {
+    font-size: x-large;
+} */
+
+.run-animation-toogler {
+    animation-timing-function: cubic-bezier(.5, -0.53, .14, 1.23);
+    animation-name: rotate;
+    animation-duration: 2.4s;
+    /* animation-iteration-count: infinite; */
+}
+
+@keyframes rotate {
+    50%, 100% {
+      transform: rotate(1turn);
+    }
+  }

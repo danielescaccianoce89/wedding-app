@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <div style="border-right: solid; margin-left: -20px;"><a class="navbar-brand margined" href="/welcome"><img
+            src="\img\logo.png" style="height: 50px;" /></a></div>
+        <button #navbar_toggler_btn class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" (click)="onClickToogler($event)">
+            <span #navbarTooglerIcon class="navbar-toggler-icon"></span>
+            <!-- <span class="toogler-btn">
+            @if(navbarExpanded) {
+                <i class="bi bi-x-lg"></i>
+            }
+            @else {
+                <i class="bi bi-list"></i>
+            }
+            </span> -->
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <li class="nav-item active" *ngFor="let item of navItems" (click)="closeTogglerBtn()">
+                    <a class="nav-link active" aria-current="page" [routerLink]="item.link" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }">{{item.label}}&nbsp;<i [class]="item.icon"></i></a>
+                </li>
+            </div>
+        </div>
+    </div>
+</nav>

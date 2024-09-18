@@ -1,0 +1,50 @@
+<div>
+    <br>
+    <h2 class="center">Servizi Utili</h2>
+    <br>
+    <div class="countdown center">
+        <div class="box-inline">
+            <h4 class="container"><i>Hairstyle</i></h4><br>
+            <img class="imgs-servizi" src="\img\hairstylist.png"><br><br>
+            <div>
+                <ul>
+                    <li *ngFor="let item of hairstyleItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
+                            target="_blank"><i class="bi bi-geo-alt-fill"></i></a></li>
+                    <br *ngFor="let i of Arr(hairstyleBreaksNumber).fill(1)">
+                </ul>
+            </div>
+        </div>
+        <div class="box-inline">
+            <h4 class="container"><i>Makeup</i></h4><br>
+            <img class="imgs-servizi" src="\img\makeup.png"><br><br>
+            <div>
+                <ul>
+                    <li *ngFor="let item of makeupItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
+                            target="_blank"><i class="bi bi-geo-alt-fill"></i></a></li>
+                    <br *ngFor="let i of Arr(makeupBreaksNumber).fill(1)">
+                </ul>
+            </div>
+        </div>
+        <div class="box-inline">
+            <h4 class="container"><i>Food</i></h4><br>
+            <img class="imgs-servizi" src="\img\cannoli.png"><br><br>
+            <div>
+                <ul>
+                    <li *ngFor="let item of foodItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
+                            target="_blank"><i class="bi bi-geo-alt-fill"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="box-inline">
+            <div>
+                <h4 class="container"><i>Altro</i></h4>
+                <img class="imgs-servizi" src="\img\emergency.png"><br><br>
+                <ul>
+                    <li *ngFor="let item of emergencyItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
+                            target="_blank"><i class="bi bi-geo-alt-fill"></i></a></li>
+                    <br *ngFor="let i of Arr(emergencyBreaksNumber).fill(1)">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

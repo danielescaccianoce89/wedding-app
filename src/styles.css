@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.cdnfonts.com/css/meldina');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://db.onlinewebfonts.com/c/07cb29fdcb073fff840edc6de2067b50?family=Amsterdam+Four_ttf');
+body {
+    /*background-color: rgba(170, 211, 226, 0.546);*/
+    font-family: "Cabin", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 5000;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+    margin-bottom: 30px;
+}
+
+.center {
+    text-align-last: center;
+    text-align: center;
+}
+
+.imgs-custom {
+    max-height: 45vh !important;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.inline {
+    display: inline-block;
+    margin: 70px;
+    max-width: 40%;
+}

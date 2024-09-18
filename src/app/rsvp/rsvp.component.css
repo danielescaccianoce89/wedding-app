@@ -1,0 +1,94 @@
+.form-container {
+    text-align: -webkit-center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+/* .form-group {
+    max-width: 30vh !important; 
+} */
+/* .form-group-custom-class {
+    width: 50vh;
+    text-align-last: center;
+} */
+
+.input-group-custom,
+.form-group {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align-last: center;
+    display: flex;
+    align-items: stretch;
+    max-width: 70vh !important;
+}
+
+.guest-select {
+    cursor: pointer;
+}
+
+.input-group-text {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    display: block;
+}
+
+.input-text {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.input-group-prepend {
+    margin-right: -1px;
+}
+
+.btn-return {
+    margin-right: 10px;
+}
+
+.disabled-custom {
+    background-color: #bdbbdc;
+    border-color: unset;
+    transition: background-color 0.6s ease-out;
+    opacity: 1;
+}
+
+.enabled-custom {
+    transition: background-color 0.6s ease-out;
+}
+
+h1,
+p {
+    text-align: center;
+}
+
+.container>form {
+    margin-top: 25px;
+}
+
+.radioDiv {
+    place-content: center;
+}
+
+.no-border {
+    border-block: none;
+}
+
+.shadow {
+    border: .5px solid #c2c2c2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 -4px 8px rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    margin: 10px;
+
+    min-width: 25%;
+    max-width: 50vh;
+}
+
+mat-option, mat-label, mat-select-trigger {
+    font-family: 'Cabin' !important;
+}
+
+
+.example-panel-blue.mat-mdc-select-panel {
+    background: rgba(0, 0, 255, 0.5);
+  }
