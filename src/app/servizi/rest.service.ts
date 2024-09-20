@@ -14,12 +14,12 @@ export class RestService {
     return this.httpClient.get<any>(url);
   } */
 
-  getGuests(url: string): Observable<any> {
+  getApi(url: string): Observable<any> {
     return this.httpClient.get<any>(url);
   }
 
-  getGuestById(url: string, id: number): Observable<any> {
+ /*  getGuestById(url: string, id: number): Observable<any> {
     return this.httpClient.get<any>(url + "/" + id);
-  }
+  } */
   
 }

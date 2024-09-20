@@ -15,7 +15,7 @@ import e from 'express';
 })
 export class RsvpComponent implements OnInit {
   [x: string]: any;
-  private apiUrl = 'http://localhost:8090/api'//'https://fake-json-api.mock.beeceptor.com/users'; // Sostituisci con il tuo URL
+  private apiUrl = 'http://127.0.0.1:8090/api'//'https://fake-json-api.mock.beeceptor.com/users'; // Sostituisci con il tuo URL
   data: any;
 
   constructor(
@@ -34,12 +34,7 @@ export class RsvpComponent implements OnInit {
   sendDataGuest: any = {};
   guests: any;
   isEnabledOtherAllergiesBox: Array<any> = [];
-  // guestsSelected: any;
-
-  guestsSelected = [
-    { id: 1, name: 'Apollonio', conferma: true },
-    { id: 2, name: 'Vincenzina', conferma: true },
-  ];
+  guestsSelected: any;
 
   onMenuSelectionChange(ev: any) {
     switch (ev.value) {
@@ -71,7 +66,7 @@ export class RsvpComponent implements OnInit {
 
   searchGuests(formData: any, stepNum: number) {
     this.ngxLoader.start();
-    this.restService.getGuests(this.apiUrl + "/getGuestsByName?guestName=").subscribe(
+    this.restService.getApi(this.apiUrl + "/getGuestsByName?guestName=" + formData.value.guestName).subscribe(
       (response) => {
         this.guests = response;
 
@@ -88,9 +83,10 @@ export class RsvpComponent implements OnInit {
 
   getGuestSelected(stepNum: number) {
     this.ngxLoader.start();
-    this.restService.getGuestById(this.apiUrl, this.idGuestSelected).subscribe(
+    this.restService.getApi(this.apiUrl + "/getGuestsById?id=" + this.idGuestSelected).subscribe(
       (response) => {
-        //this.guestsSelected = [response];
+        debugger;
+        this.guestsSelected = response.peopleById;
         console.log('Data received:', response);
 
         if (stepNum !== -1) this.stepActive = stepNum;
