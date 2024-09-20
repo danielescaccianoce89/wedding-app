@@ -15,7 +15,7 @@ import e from 'express';
 })
 export class RsvpComponent implements OnInit {
   [x: string]: any;
-  private apiUrl = 'https://fake-json-api.mock.beeceptor.com/users'; // Sostituisci con il tuo URL
+  private apiUrl = 'http://localhost:8090/api'//'https://fake-json-api.mock.beeceptor.com/users'; // Sostituisci con il tuo URL
   data: any;
 
   constructor(
@@ -71,7 +71,7 @@ export class RsvpComponent implements OnInit {
 
   searchGuests(formData: any, stepNum: number) {
     this.ngxLoader.start();
-    this.restService.getGuests(this.apiUrl).subscribe(
+    this.restService.getGuests(this.apiUrl + "/getGuestsByName?guestName=").subscribe(
       (response) => {
         this.guests = response;
 
