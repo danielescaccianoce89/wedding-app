@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import e from 'express';
 
+declare var Swal: any; /* declare global variable fro SweetAlert usage */
+
 @Component({
   selector: 'app-rsvp',
   templateUrl: './rsvp.component.html',
@@ -24,9 +26,8 @@ export class RsvpComponent implements OnInit {
     private ngxLoader: NgxUiLoaderService,
     private alertService: AlertService
   ) {}
-  ngOnInit(): void {}
 
-  menuSelectedValueText!: string;
+  menuSelectedValueText: Array<any> = [];
   stepActive: number = 0;
   guestSelected: boolean = false;
   idGuestSelected!: number;
@@ -35,21 +36,35 @@ export class RsvpComponent implements OnInit {
   guests: any;
   isEnabledOtherAllergiesBox: Array<any> = [];
   guestsSelected: any;
+  confirmSelection: Array<any> = [];
+  guestsHasConfirmed: Array<any> = [];
+  // allergySelected: Array<any> = [];
 
-  onMenuSelectionChange(ev: any) {
+  ngOnInit(): void {
+  }
+
+  toogleConfirmationGuest(idx: number, confirm: boolean) {
+    this.guestsHasConfirmed[idx] = confirm;
+  }
+
+  onMenuSelectionChange(idx: number, ev: any) {
     switch (ev.value) {
       case '1':
-        this.menuSelectedValueText = 'Pesce';
+        this.menuSelectedValueText[idx] = 'Pesce';
         break;
       case '2':
-        this.menuSelectedValueText = 'Carne';
+        this.menuSelectedValueText[idx] = 'Carne';
         break;
       case '3':
-        this.menuSelectedValueText = 'Vegetariano';
+        this.menuSelectedValueText[idx] = 'Vegetariano';
         break;
       default:
         break;
     }
+  }
+
+  onConfirmSelectionChange(idx: number, ev: any) {
+    this.confirmSelection[idx] = ev.target.value;
   }
 
   checkVisibilityOtherAllergiesBox(idx: number, ev: any) {
@@ -61,7 +76,8 @@ export class RsvpComponent implements OnInit {
   }
 
   checkValue(val: String) {
-    return val === '99';
+    return val === 'Altro';
+    // return val === '99';
   }
 
   searchGuests(formData: any, stepNum: number) {
@@ -102,26 +118,49 @@ export class RsvpComponent implements OnInit {
   }
 
   saveGuestsData(formData: any) {
-    let guestsData: any = {};
-    guestsData.id = this.idGuestSelected; // id padre (racchiude una solo persona o coppie)
-    guestsData.guests = formData.value;
+    debugger;
+    let guestsData :any = {};
+    guestsData.guests = Object.values(formData.value);    
+    guestsData.idGuestFather = this.idGuestSelected; // id padre (racchiude una solo persona o coppie)
 
-    this.alertService.showDialogConfirm();
-    console.log(JSON.stringify(guestsData));
-  }
-
-  saveFormData(formData: any) {
-    this.sendDataGuest = {};
-    this.sendDataGuest.id = this.idGuestSelected;
-    this.sendDataGuest.children = formData.value;
-    console.log(this.sendDataGuest);
-  }
-
-  saveGuestSelected() {}
-
-  onSelezione(formInfoGuest: any) {
-    console.log('passaggio');
-    console.log(formInfoGuest);
+    guestsData.guests.forEach( (e:any) => {
+      e.allergySelected === "" ? e.allergySelected = [] : e.allergySelected;
+      (e.confirmSelection === undefined || e.confirmSelection === "") ?  e.confirmSelection = e['confirmSelection_' + e.id] : e.confirmSelection;
+    })
+    // this.alertService.showDialogConfirm();
+    console.log(guestsData);
+    Swal.fire({
+      title: 'Sei sicuro?',
+      text: 'La tua preferenza non potrà essere più cambiata',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'blue',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Salva',
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.ngxLoader.start();
+        this.restService
+          .putApi(this.apiUrl + '/updateGuestsPreferences', guestsData)
+          .subscribe(
+            (response) => {
+              debugger;
+              console.log('Data received:', response);
+              this.goToStep(0);
+              this.ngxLoader.stop();
+              Swal.fire({
+                title: 'Operazione riuscita',
+                text: 'La tua preferenza è stata salvata',
+                icon: 'success',
+              });
+            },
+            (error) => {
+              console.error('Error occurred:', error);
+              this.ngxLoader.stop();
+            }
+          );
+      }
+    });
   }
 
   goToStep(stepNum: number) {

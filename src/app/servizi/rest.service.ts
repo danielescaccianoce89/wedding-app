@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RestService {
+  
 
   constructor(private httpClient: HttpClient) {}
 
@@ -16,6 +17,10 @@ export class RestService {
 
   getApi(url: string): Observable<any> {
     return this.httpClient.get<any>(url);
+  }
+
+  putApi(url: string, data: any) {
+    return this.httpClient.put(url, data);
   }
 
  /*  getGuestById(url: string, id: number): Observable<any> {

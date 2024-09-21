@@ -37,7 +37,7 @@ export class AlertService {
       cancelButtonColor: "red",
       confirmButtonText: "Salva"
     }).then((result: any) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed) { 
         Swal.fire({
           title: "Operazione riuscita",
           text: "La tua preferenza è stata salvata",

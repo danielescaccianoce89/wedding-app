@@ -18,11 +18,11 @@
         <div *ngFor="let guest of guests" class="input-group-custom">
             <div class="input-group-prepend guest-select">
                 <div class="input-group-text">
-                    <input [disabled]="guest.conferma" type="radio" name="guestSelected" value={{guest.id}}
+                    <input [disabled]="guest.confirm" type="radio" name="guestSelected" value={{guest.id}}
                         (change)="onGuestChecked($event)">
                 </div>
             </div>
-            <input (click)="selectCloserRadioBtn($event)" type="text" [disabled]="guest.conferma"
+            <input (click)="selectCloserRadioBtn($event)" type="text" [disabled]="guest.confirm"
                 class="form-control input-text guest-select" value="{{guest.name}}" readonly>
         </div>
         <br>
@@ -40,47 +40,30 @@
         </p>
         <ng-template #otherContent>Conferma la tua presenza e la tua preferenza</ng-template>
         <br>
-        <div *ngFor="let guest of guestsSelected; let i = index" class="form-row shadow" ngModelGroup="{{guest.id}}">
+        <div *ngFor="let guest of guestsSelected; let i = index" class="form-row shadow" ngModelGroup={{guest.id}}>
             <div class="form-group row">
                 <h3 name="name" [(ngModel)]="guest.name">{{guest.name}}</h3>
+                <h3 name="id" [(ngModel)]="guest.id"></h3>
             </div>
             <div class="form-group row radioDiv">
                 <div class="some-class" style="width:auto; text-align-last: left;">
                     <label for="confirmSelection">Conferma presenza*</label>
                 </div>
                 <div class="some-class" style="width: auto; text-align-last: center;">
-                    <input type="radio" ngModel name="confirmSelection{{guest.id}}" value="Y"
+                    <input type="radio" ngModel name="confirmSelection_{{guest.id}}" value="Y" (click)="toogleConfirmationGuest(i, true)"
                         class="custom-control-input" required>
                     <label for="selectionRadioSi">&nbsp;Si</label>
-                    <input type="radio" ngModel name="confirmSelection{{guest.id}}" value="N"
+                    <input type="radio" ngModel name="confirmSelection_{{guest.id}}" value="N"  (click)="toogleConfirmationGuest(i, false)"
                         class="custom-control-input" style="margin-left: 25px;" required>
                     <label for="selectionRadioNo">&nbsp;No</label>
                 </div>
             </div>
-            <!-- <div class="form-group row field">
-                <div class="control has-icons-left">
-                    <div class="select">
-                        <div class="icon is-left">
-                            <i class="fa-solid fa-utensils"></i>
-                        </div>
-                        <select name="menuSelected_{{guest.id}}" ngModel required>
-                            <option value="" multiple selected>
-                                Scegli il menù
-                            </option>
-                            <option value="1">Pesce</option>
-                            <option value="2">Carne</option>
-                            <option value="3">Vegetariano</option>
-                        </select>
-                    </div>
-
-                </div>
-            </div> -->
-            <div class="form-group row field">
+            <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
                 <mat-form-field appearance="outline">
                     <mat-label class="label-custom"><i class="fa-solid fa-utensils"></i>&nbsp;Scegli il menù</mat-label>
-                    <mat-select name="menuSelected_{{guest.id}}" (selectionChange)="onMenuSelectionChange($event)" ngModel required>
+                    <mat-select name="menuSelected" (selectionChange)="onMenuSelectionChange(i, $event)" ngModel [required]="!guestsHasConfirmed[i]">
                         <mat-select-trigger>
-                            {{menuSelectedValueText}}
+                             {{this.menuSelectedValueText[i]}}
                         </mat-select-trigger>
                         <mat-option value="1">Pesce</mat-option>
                         <mat-option value="2">Carne</mat-option>
@@ -88,12 +71,12 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="form-group row field">
+            <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
                 <mat-form-field appearance="outline">
                     <mat-label class="label-custom"><i class="fa-solid fa-syringe"></i>&nbsp;Eventuali
                         Allergie</mat-label>
-                    <mat-select #allergySelection name="allergySelected_{{guest.id}}" ngModel
-                        (selectionChange)="checkVisibilityOtherAllergiesBox(i, $event)" multiple>
+                    <mat-select #allergySelection name="allergySelected" ngModel
+                        (selectionChange)="checkVisibilityOtherAllergiesBox(i, $event)" [required]="!guestsHasConfirmed[i]" multiple>
                         <mat-select-trigger>
                             <span *ngIf="(allergySelection.value.length || 0) >= 1"
                                 class="example-additional-selection">
@@ -101,15 +84,15 @@
                                 'selezionata'}}
                             </span>
                         </mat-select-trigger>
-                        <mat-option value="1">Lattosio</mat-option>
-                        <mat-option value="2">Glutine</mat-option>
-                        <mat-option value="3">Crostacei</mat-option>
-                        <mat-option value="99">Altro</mat-option>
+                        <mat-option value="Lattosio">Lattosio</mat-option>
+                        <mat-option value="Glutine">Glutine</mat-option>
+                        <mat-option value="Crostacei">Crostacei</mat-option>
+                        <mat-option value="Altro">Altro</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div *ngIf="this.isEnabledOtherAllergiesBox[i]" form-group row>
-                <input type="text" placeholder="Inserisci qui le ulteriori allergie" name="otherAllergies_{{guest.id}}"
+            <div *ngIf="this.isEnabledOtherAllergiesBox[i] && guestsHasConfirmed[i] === true" form-group row>
+                <input type="text" placeholder="Inserisci qui le ulteriori allergie" name="otherAllergies"
                     class="form-control input-text" ngModel>
             </div>
             <br>

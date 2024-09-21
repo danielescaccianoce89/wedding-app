@@ -21,7 +21,7 @@ import { ServiziUtiliComponent } from './servizi-utili/servizi-utili.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RsvpComponent } from './rsvp/rsvp.component';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 
 
 @NgModule({
@@ -48,7 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
     }),
     HttpClientModule // Aggiungi HttpClientModule agli imports
   ],
-  providers: [provideClientHydration(), provideAnimationsAsync()],
+  providers: [provideClientHydration(), provideAnimationsAsync(), provideHttpClient(withFetch())], // Configura HttpClient per usare fetch],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
