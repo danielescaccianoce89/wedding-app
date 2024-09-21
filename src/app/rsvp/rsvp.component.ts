@@ -141,7 +141,7 @@ export class RsvpComponent implements OnInit {
       if (result.isConfirmed) {
         this.ngxLoader.start();
         this.restService
-          .putApi(this.apiUrl + '/updateGuestsPreferences', guestsData)
+          .postApi(this.apiUrl + '/updateGuestsPreferences', guestsData)
           .subscribe(
             (response) => {
               debugger;

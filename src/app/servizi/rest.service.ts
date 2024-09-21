@@ -19,8 +19,8 @@ export class RestService {
     return this.httpClient.get<any>(url);
   }
 
-  putApi(url: string, data: any) {
-    return this.httpClient.put(url, data);
+  postApi(url: string, data: any) {
+    return this.httpClient.post(url, data);
   }
 
  /*  getGuestById(url: string, id: number): Observable<any> {
