@@ -15,15 +15,16 @@
 
     <div *ngIf="stepActive==1">
         <p>Seleziona il tuo nome</p>
-        <div *ngFor="let guest of guests" class="input-group-custom">
+        <div *ngFor="let guest of guests; let i = index" class="input-group-custom">
             <div class="input-group-prepend guest-select">
                 <div class="input-group-text">
                     <input [disabled]="guest.confirm" type="radio" name="guestSelected" value={{guest.id}}
                         (change)="onGuestChecked($event)">
                 </div>
             </div>
-            <input (click)="selectCloserRadioBtn($event)" type="text" [disabled]="guest.confirm"
-                class="form-control input-text guest-select" value="{{guest.name}}" readonly>
+            <div class="input-group-text text-guest-name" (click)="selectCloserRadioBtn($event)" [innerHTML]="guestNames[i]" [ngClass]="{'active' : guest.confirm === null}"></div>
+            <!-- <input (click)="selectCloserRadioBtn($event)" type="text" [disabled]="guest.confirm"
+                class="form-control input-text guest-select" value="{{guest.name}}" readonly> -->
         </div>
         <br>
         <button class="btn btn-primary btn-return" (click)="goToStep(0)"><i

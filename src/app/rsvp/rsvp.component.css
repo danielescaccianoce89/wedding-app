@@ -92,3 +92,16 @@ mat-option, mat-label, mat-select-trigger {
 .example-panel-blue.mat-mdc-select-panel {
     background: rgba(0, 0, 255, 0.5);
   }
+
+.input-group-custom {
+    align-items: baseline;
+}
+
+.text-guest-name {
+    width: -webkit-fill-available;
+}
+
+.active {
+    background-color: white;
+    cursor: pointer;
+}

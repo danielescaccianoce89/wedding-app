@@ -38,6 +38,7 @@ export class RsvpComponent implements OnInit {
   guestsSelected: any;
   confirmSelection: Array<any> = [];
   guestsHasConfirmed: Array<any> = [];
+  guestNames: Array<any> = [];
   // allergySelected: Array<any> = [];
 
   ngOnInit(): void {
@@ -82,10 +83,16 @@ export class RsvpComponent implements OnInit {
 
   searchGuests(formData: any, stepNum: number) {
     this.ngxLoader.start();
+    this.guestNames = [];
     this.restService.getApi(this.apiUrl + "/getGuestsByName?guestName=" + formData.value.guestName).subscribe(
       (response) => {
         this.guests = response;
-
+        let i = 0;
+        this.guests.forEach( (g:any) => {
+          g.confirm === "Y" ? this.guestNames[i] = g.name + "&nbsp;&nbsp;<i class='fa-regular fa-circle-check'>" : this.guestNames[i] = g.name;  
+          i++;    
+        })
+        console.log(this.guestNames);
         if (stepNum !== -1) this.stepActive = stepNum;
         else console.log('button disabilitato');
         this.ngxLoader.stop();
