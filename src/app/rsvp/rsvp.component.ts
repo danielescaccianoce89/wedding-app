@@ -39,6 +39,7 @@ export class RsvpComponent implements OnInit {
   confirmSelection: Array<any> = [];
   guestsHasConfirmed: Array<any> = [];
   guestNames: Array<any> = [];
+  guestsData: any = {};
   // allergySelected: Array<any> = [];
 
   ngOnInit(): void {
@@ -105,6 +106,8 @@ export class RsvpComponent implements OnInit {
   }
 
   getGuestSelected(stepNum: number) {
+    this.guestsHasConfirmed = [];
+    this.guestsData = {};
     this.ngxLoader.start();
     this.restService.getApi(this.apiUrl + "/getGuestsById?id=" + this.idGuestSelected).subscribe(
       (response) => {
@@ -126,16 +129,15 @@ export class RsvpComponent implements OnInit {
 
   saveGuestsData(formData: any) {
     debugger;
-    let guestsData :any = {};
-    guestsData.guests = Object.values(formData.value);    
-    guestsData.idGuestFather = this.idGuestSelected; // id padre (racchiude una solo persona o coppie)
+    this.guestsData.guests = Object.values(formData.value);    
+    this.guestsData.idGuestFather = this.idGuestSelected; // id padre (racchiude una solo persona o coppie)
 
-    guestsData.guests.forEach( (e:any) => {
+    this.guestsData.guests.forEach( (e:any) => {
       e.allergySelected === "" ? e.allergySelected = [] : e.allergySelected;
       (e.confirmSelection === undefined || e.confirmSelection === "") ?  e.confirmSelection = e['confirmSelection_' + e.id] : e.confirmSelection;
     })
     // this.alertService.showDialogConfirm();
-    console.log(guestsData);
+    console.log(this.guestsData);
     Swal.fire({
       title: 'Sei sicuro?',
       text: 'La tua preferenza non potrà essere più cambiata',
@@ -148,7 +150,7 @@ export class RsvpComponent implements OnInit {
       if (result.isConfirmed) {
         this.ngxLoader.start();
         this.restService
-          .postApi(this.apiUrl + '/updateGuestsPreferences', guestsData)
+          .postApi(this.apiUrl + '/updateGuestsPreferences', this.guestsData)
           .subscribe(
             (response) => {
               debugger;
@@ -171,6 +173,7 @@ export class RsvpComponent implements OnInit {
   }
 
   goToStep(stepNum: number) {
+    debugger;
     this.stepActive = stepNum;
   }
 
