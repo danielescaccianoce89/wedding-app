@@ -99,6 +99,8 @@ mat-option, mat-label, mat-select-trigger {
 
 .text-guest-name {
     width: 100%;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
 }
 
 .active {
