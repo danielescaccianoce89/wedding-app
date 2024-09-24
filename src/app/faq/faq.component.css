@@ -10,4 +10,5 @@ img {
 ul {
     margin-bottom: 0px;
     margin-top: 2px;
+    list-style: unset;
 }

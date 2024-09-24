@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RestService {
   
+  private apiUrl = 'http://wedding-app-api.eu-north-1.elasticbeanstalk.com/api'
 
   constructor(private httpClient: HttpClient) {}
 
@@ -16,11 +17,11 @@ export class RestService {
   } */
 
   getApi(url: string): Observable<any> {
-    return this.httpClient.get<any>(url);
+    return this.httpClient.get<any>(this.apiUrl + url);
   }
 
   postApi(url: string, data: any) {
-    return this.httpClient.post(url, data);
+    return this.httpClient.post(this.apiUrl + url, data);
   }
 
  /*  getGuestById(url: string, id: number): Observable<any> {

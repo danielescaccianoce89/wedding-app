@@ -17,7 +17,6 @@ declare var Swal: any; /* declare global variable fro SweetAlert usage */
 })
 export class RsvpComponent implements OnInit {
   [x: string]: any;
-  private apiUrl = 'http://127.0.0.1:8090/api'//'https://fake-json-api.mock.beeceptor.com/users'; // Sostituisci con il tuo URL
   data: any;
 
   constructor(
@@ -85,7 +84,7 @@ export class RsvpComponent implements OnInit {
   searchGuests(formData: any, stepNum: number) {
     this.ngxLoader.start();
     this.guestNames = [];
-    this.restService.getApi(this.apiUrl + "/getGuestsByName?guestName=" + formData.value.guestName).subscribe(
+    this.restService.getApi("/getGuestsByName?guestName=" + formData.value.guestName).subscribe(
       (response) => {
         this.guests = response;
         let i = 0;
@@ -109,7 +108,7 @@ export class RsvpComponent implements OnInit {
     this.guestsHasConfirmed = [];
     this.guestsData = {};
     this.ngxLoader.start();
-    this.restService.getApi(this.apiUrl + "/getGuestsById?id=" + this.idGuestSelected).subscribe(
+    this.restService.getApi("/getGuestsById?id=" + this.idGuestSelected).subscribe(
       (response) => {
         debugger;
         this.guestsSelected = response.peopleById;
@@ -150,7 +149,7 @@ export class RsvpComponent implements OnInit {
       if (result.isConfirmed) {
         this.ngxLoader.start();
         this.restService
-          .postApi(this.apiUrl + '/updateGuestsPreferences', this.guestsData)
+          .postApi('/updateGuestsPreferences', this.guestsData)
           .subscribe(
             (response) => {
               debugger;

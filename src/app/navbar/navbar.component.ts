@@ -14,7 +14,7 @@ export class NavbarComponent {
 
   navItems = [
     {
-      icon: 'bi bi-house',
+      icon: 'fa-solid fa-house',
       label: 'Home',
       link: 'welcome',
     },
