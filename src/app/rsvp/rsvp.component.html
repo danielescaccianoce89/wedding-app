@@ -1,6 +1,6 @@
 <div class="form-container">
     <br>
-    <h1>RSVP&nbsp;<i class="fa-solid fa-user-check fa-lg"></i></h1>
+    <h2>RSVP&nbsp;<i class="fa-solid fa-user-check fa-lg"></i></h2>
     <br>
     <!--TEMPLATE DRIVEN FORM-->
     <form *ngIf="stepActive==0" #formGuest="ngForm" (ngSubmit)="searchGuests(formGuest, 1)">
@@ -44,73 +44,103 @@
         </p>
         <ng-template #otherContent>Conferma la tua presenza e la tua preferenza</ng-template>
         <br>
-        <div *ngFor="let guest of guestsSelected; let i = index" class="form-row shadow" ngModelGroup={{guest.id}}>
-            <div class="form-group row">
-                <h3 name="name" [(ngModel)]="guest.name">{{guest.name}}</h3>
-                <h3 name="id" [(ngModel)]="guest.id"></h3>
-            </div>
-            <div class="form-group row radioDiv">
-                <div class="some-class" style="width:auto; text-align-last: left;">
-                    <label for="confirmSelection">Conferma presenza*</label>
+        <div class="form-row" ngModelGroup="guestGroup">
+            <div *ngFor="let guest of guestsSelected.peopleById; let i = index" class="form-row shadow"
+                ngModelGroup={{guest.id}}>
+                <div class="form-group row">
+                    <h3 name="name" [(ngModel)]="guest.name">{{guest.name}}</h3>
+                    <h3 name="id" [(ngModel)]="guest.id"></h3>
                 </div>
-                <div class="some-class" style="width: auto; text-align-last: center;">
-                    <input type="radio" ngModel name="confirmSelection_{{guest.id}}" value="Y"
-                        (click)="toogleConfirmationGuest(i, true)" class="custom-control-input" required>
-                    <label for="selectionRadioSi">&nbsp;Si</label>
-                    <input type="radio" ngModel name="confirmSelection_{{guest.id}}" value="N"
-                        (click)="toogleConfirmationGuest(i, false)" class="custom-control-input"
-                        style="margin-left: 25px;" required>
-                    <label for="selectionRadioNo">&nbsp;No</label>
+                <div class="form-group row radioDiv">
+                    <div class="some-class" style="width:auto; text-align-last: left;">
+                        <label for="confirmSelection">Conferma presenza*</label>
+                    </div>
+                    <div class="some-class" style="width: auto; text-align-last: center;">
+                        <input type="radio" ngModel name="confirmSelection_{{guest.id}}" value="Y"
+                            (click)="toogleConfirmationGuest(i, true)" class="custom-control-input" required>
+                        <label for="selectionRadioSi">&nbsp;Si</label>
+                        <input type="radio" ngModel name="confirmSelection_{{guest.id}}" value="N"
+                            (click)="toogleConfirmationGuest(i, false)" class="custom-control-input"
+                            style="margin-left: 25px;" required>
+                        <label for="selectionRadioNo">&nbsp;No</label>
+                    </div>
                 </div>
+                <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="label-custom"><i class="fa-solid fa-utensils"></i>&nbsp;Scegli il
+                            menù*</mat-label>
+                        <mat-select name="menuSelected" (selectionChange)="onMenuSelectionChange(i, $event)" ngModel
+                            [required]="!guestsHasConfirmed[i]">
+                            <mat-select-trigger>
+                                {{this.menuSelectedValueText[i]}}
+                            </mat-select-trigger>
+                            <mat-option value="1">Pesce</mat-option>
+                            <mat-option value="2">Carne</mat-option>
+                            <mat-option value="3">Vegetariano</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="label-custom"><i class="fa-solid fa-syringe"></i>&nbsp;Eventuali
+                            Allergie</mat-label>
+                        <mat-select #allergySelection name="allergySelected" ngModel
+                            (selectionChange)="checkVisibilityOtherAllergiesBox(i, $event)"
+                            [required]="!guestsHasConfirmed[i]" multiple>
+                            <mat-select-trigger>
+                                <span *ngIf="(allergySelection.value.length || 0) >= 1"
+                                    class="example-additional-selection">
+                                    {{allergySelection.value.length}} {{allergySelection.value.length > 1 ?
+                                    'selezionate' :
+                                    'selezionata'}}
+                                </span>
+                            </mat-select-trigger>
+                            <mat-option value="Lattosio">Lattosio</mat-option>
+                            <mat-option value="Glutine">Glutine</mat-option>
+                            <mat-option value="Crostacei">Crostacei</mat-option>
+                            <mat-option value="Altro">Altro</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="this.isEnabledOtherAllergiesBox[i] && guestsHasConfirmed[i] === true" form-group row>
+                    <input type="text" placeholder="Inserisci qui le ulteriori allergie" name="otherAllergies"
+                        class="form-control input-text" ngModel>
+                </div>
+                <br>
             </div>
-            <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
-                <mat-form-field appearance="outline">
-                    <mat-label class="label-custom"><i class="fa-solid fa-utensils"></i>&nbsp;Scegli il menù</mat-label>
-                    <mat-select name="menuSelected" (selectionChange)="onMenuSelectionChange(i, $event)" ngModel
-                        [required]="!guestsHasConfirmed[i]">
-                        <mat-select-trigger>
-                            {{this.menuSelectedValueText[i]}}
-                        </mat-select-trigger>
-                        <mat-option value="1">Pesce</mat-option>
-                        <mat-option value="2">Carne</mat-option>
-                        <mat-option value="3">Vegetariano</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
-                <mat-form-field appearance="outline">
-                    <mat-label class="label-custom"><i class="fa-solid fa-syringe"></i>&nbsp;Eventuali
-                        Allergie</mat-label>
-                    <mat-select #allergySelection name="allergySelected" ngModel
-                        (selectionChange)="checkVisibilityOtherAllergiesBox(i, $event)"
-                        [required]="!guestsHasConfirmed[i]" multiple>
-                        <mat-select-trigger>
-                            <span *ngIf="(allergySelection.value.length || 0) >= 1"
-                                class="example-additional-selection">
-                                {{allergySelection.value.length}} {{allergySelection.value.length > 1 ? 'selezionate' :
-                                'selezionata'}}
-                            </span>
-                        </mat-select-trigger>
-                        <mat-option value="Lattosio">Lattosio</mat-option>
-                        <mat-option value="Glutine">Glutine</mat-option>
-                        <mat-option value="Crostacei">Crostacei</mat-option>
-                        <mat-option value="Altro">Altro</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div *ngIf="this.isEnabledOtherAllergiesBox[i] && guestsHasConfirmed[i] === true" form-group row>
-                <input type="text" placeholder="Inserisci qui le ulteriori allergie" name="otherAllergies"
-                    class="form-control input-text" ngModel>
-            </div>
-            <br>
         </div>
         <br>
-        <button type="button" class="btn btn-primary btn-return" (click)="goToStep(0)"><i
-                class="bi bi-arrow-left-circle"></i>&nbsp;&nbsp;Nuova ricerca</button>
-        <button type="submit"
-            [ngClass]="!guestSelected ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'"
-            [ngClass]="!formConfirm.valid ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'"
-            [disabled]="!formConfirm.valid">Continua&nbsp;&nbsp;<i class="bi bi-check-circle"></i></button>
+        <div *ngIf="willAllGuestsBePresent() === true" class="form-row" ngModelGroup="childrenSelection">
+            <!-- <div *ngIf="guestsSelected.length > 1"> -->
+            <mat-form-field *ngIf="guestsSelected.peopleById.length > 1" appearance="outline">
+                <mat-label class="label-custom"><i class="fa-solid fa-baby"></i>&nbsp;Bambini?</mat-label>
+                <mat-select name="areChildrenPresent" ngModel>
+                    <mat-select-trigger>
+                        <span>
+                            {{formConfirm.value.childrenSelection.areChildrenPresent === "1" ? "Si" : "No"}}
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option value="1">Si</mat-option>
+                    <mat-option value="2">No</mat-option>
+                </mat-select>
+            </mat-form-field>&nbsp;&nbsp;
+            <!-- </div>
+                <div *ngIf="formConfirm.value.childrenSelect === '1'"> -->
+            <mat-form-field *ngIf="formConfirm.value.childrenSelection.areChildrenPresent === '1'" appearance="outline">
+                <mat-label>Numero bambini</mat-label>
+                <input name="childrenNumber" ngModel type="number" min="0" matInput value="0">
+            </mat-form-field>
+            <!-- </div> -->
+        </div>
+        <br>
+        <div class="form-row">
+            <button type="button" class="btn btn-primary btn-return" (click)="goToStep(0)"><i
+                    class="bi bi-arrow-left-circle"></i>&nbsp;&nbsp;Nuova ricerca</button>
+            <button type="submit"
+                [ngClass]="!guestSelected ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'"
+                [ngClass]="!formConfirm.valid ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'"
+                [disabled]="!formConfirm.valid">Continua&nbsp;&nbsp;<i class="bi bi-check-circle"></i></button>
+        </div>
     </form>
 </div>
 <ngx-ui-loader></ngx-ui-loader>

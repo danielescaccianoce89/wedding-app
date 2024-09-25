@@ -13,7 +13,7 @@ declare var Swal: any; /* declare global variable fro SweetAlert usage */
 @Component({
   selector: 'app-rsvp',
   templateUrl: './rsvp.component.html',
-  styleUrl: './rsvp.component.css',
+  styleUrl: './rsvp.component.css'
 })
 export class RsvpComponent implements OnInit {
   [x: string]: any;
@@ -39,13 +39,27 @@ export class RsvpComponent implements OnInit {
   guestsHasConfirmed: Array<any> = [];
   guestNames: Array<any> = [];
   guestsData: any = {};
-  // allergySelected: Array<any> = [];
+  allGuestsConfirmYes: boolean = false;
 
   ngOnInit(): void {
   }
 
   toogleConfirmationGuest(idx: number, confirm: boolean) {
     this.guestsHasConfirmed[idx] = confirm;
+  }
+
+  willAllGuestsBePresent() {
+    debugger;
+
+    if(this.guestsHasConfirmed.length === 0)
+      return false;
+    else {
+      for(let i=0; i < this.guestsHasConfirmed.length; i++) {
+        if (this.guestsHasConfirmed[i] === true) return true;
+      }
+      return false;
+    }
+   
   }
 
   onMenuSelectionChange(idx: number, ev: any) {
@@ -62,10 +76,6 @@ export class RsvpComponent implements OnInit {
       default:
         break;
     }
-  }
-
-  onConfirmSelectionChange(idx: number, ev: any) {
-    this.confirmSelection[idx] = ev.target.value;
   }
 
   checkVisibilityOtherAllergiesBox(idx: number, ev: any) {
@@ -111,7 +121,7 @@ export class RsvpComponent implements OnInit {
     this.restService.getApi("/getGuestsById?id=" + this.idGuestSelected).subscribe(
       (response) => {
         debugger;
-        this.guestsSelected = response.peopleById;
+        this.guestsSelected = response;
         console.log('Data received:', response);
 
         if (stepNum !== -1) this.stepActive = stepNum;
@@ -128,14 +138,13 @@ export class RsvpComponent implements OnInit {
 
   saveGuestsData(formData: any) {
     debugger;
-    this.guestsData.guests = Object.values(formData.value);    
+    this.guestsData.guests = Object.values(formData.value.guestGroup);    
     this.guestsData.idGuestFather = this.idGuestSelected; // id padre (racchiude una solo persona o coppie)
-
+    this.guestsData.childrenSelection = formData.value.childrenSelection;
     this.guestsData.guests.forEach( (e:any) => {
       e.allergySelected === "" ? e.allergySelected = [] : e.allergySelected;
       (e.confirmSelection === undefined || e.confirmSelection === "") ?  e.confirmSelection = e['confirmSelection_' + e.id] : e.confirmSelection;
     })
-    // this.alertService.showDialogConfirm();
     console.log(this.guestsData);
     Swal.fire({
       title: 'Sei sicuro?',

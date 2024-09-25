@@ -4,12 +4,12 @@
 body {
     /*background-color: rgba(170, 211, 226, 0.546);*/
     font-family: "Cabin", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 5000;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+    font-optical-sizing: auto;
+    font-weight: 5000;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
     margin-bottom: 30px;
+    background-color: whitesmoke;
 }
 
 .center {

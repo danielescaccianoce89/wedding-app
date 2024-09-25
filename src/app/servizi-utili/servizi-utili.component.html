@@ -13,7 +13,7 @@
                         &nbsp;&nbsp;
                         <a href={{item.socialUrl}} target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
                     </li>
-                    <br *ngFor="let i of Arr(hairstyleBreaksNumber).fill(1)">
+                    <!--<br *ngFor="let i of Arr(hairstyleBreaksNumber).fill(1)">-->
                 </ul>
             </div>
         </div>
@@ -27,13 +27,12 @@
                         &nbsp;&nbsp;
                         <a href={{item.socialUrl}} target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
                     </li>
-                    <br *ngFor="let i of Arr(makeupBreaksNumber).fill(1)">
                 </ul>
             </div>
         </div>
         <div class="box-inline">
             <h4 class="container"><i>Bar & Cafè</i></h4><br>
-            <img class="imgs-servizi" src="\img\cannoli.png"><br><br>
+            <img class="imgs-servizi" src="\img\coffee.png"><br><br>
             <div>
                 <ul>
                     <li *ngFor="let item of barItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
@@ -64,7 +63,6 @@
                 <ul>
                     <li *ngFor="let item of emergencyItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
                             target="_blank"><i class="fa-solid fa-location-dot"></i></a></li>
-                    <br *ngFor="let i of Arr(emergencyBreaksNumber).fill(1)">
                 </ul>
             </div>
         </div>

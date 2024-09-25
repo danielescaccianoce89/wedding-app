@@ -88,6 +88,10 @@ mat-option, mat-label, mat-select-trigger {
     font-family: 'Cabin' !important;
 }
 
+input {
+    font-family: 'Cabin' !important;
+}
+
 
 .example-panel-blue.mat-mdc-select-panel {
     background: rgba(0, 0, 255, 0.5);
@@ -106,4 +110,8 @@ mat-option, mat-label, mat-select-trigger {
 .active {
     background-color: white;
     cursor: pointer;
+}
+
+.inline {
+    display: inline-block;
 }

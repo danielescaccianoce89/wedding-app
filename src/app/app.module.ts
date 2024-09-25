@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 import { CerimoniaComponent } from './cerimonia/cerimonia.component';
 import { FaqComponent } from './faq/faq.component';
 import { MainComponent } from './main/main.component';
@@ -43,6 +44,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    FormsModule, MatFormFieldModule, MatInputModule, MatIconModule,
     NgxUiLoaderModule.forRoot({
       // Opzioni di configurazione opzionali
     }),

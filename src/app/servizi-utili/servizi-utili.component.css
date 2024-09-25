@@ -24,4 +24,5 @@ ul {
 .box-inline {
     display: inline-block;
     margin: 45px;
+    vertical-align: top;
 }

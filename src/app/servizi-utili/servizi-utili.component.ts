@@ -150,9 +150,5 @@ export class ServiziUtiliComponent {
       mapsUrl: 'https://maps.app.goo.gl/MexgihGMDC3REoeT8',
     }
   ];
-
-  hairstyleBreaksNumber = 1;
-  makeupBreaksNumber = 3;
-  foodBreaksNumber = 0;
-  emergencyBreaksNumber = 4;
+  
 }
