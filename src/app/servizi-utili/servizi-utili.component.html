@@ -1,6 +1,6 @@
 <div>
     <br>
-    <h2 class="center">Servizi Utili</h2>
+    <h2 class="center">Servizi Utili&nbsp;<i class="fa-solid fa-basket-shopping fa-lg"></i></h2>
     <br>
     <div class="countdown center">
         <div class="box-inline">
@@ -9,7 +9,10 @@
             <div>
                 <ul>
                     <li *ngFor="let item of hairstyleItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
-                            target="_blank"><i class="fa-solid fa-location-dot"></i></a>&nbsp;<i class="fa-brands fa-instagram"></i> </li>
+                            target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+                        &nbsp;&nbsp;
+                        <a href={{item.socialUrl}} target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                    </li>
                     <br *ngFor="let i of Arr(hairstyleBreaksNumber).fill(1)">
                 </ul>
             </div>
@@ -20,18 +23,37 @@
             <div>
                 <ul>
                     <li *ngFor="let item of makeupItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
-                            target="_blank"><i class="fa-solid fa-location-dot"></i></a></li>
+                            target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+                        &nbsp;&nbsp;
+                        <a href={{item.socialUrl}} target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                    </li>
                     <br *ngFor="let i of Arr(makeupBreaksNumber).fill(1)">
                 </ul>
             </div>
         </div>
         <div class="box-inline">
-            <h4 class="container"><i>Food</i></h4><br>
+            <h4 class="container"><i>Bar & Cafè</i></h4><br>
             <img class="imgs-servizi" src="\img\cannoli.png"><br><br>
             <div>
                 <ul>
+                    <li *ngFor="let item of barItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
+                            target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+                        &nbsp;&nbsp;
+                        <a href={{item.socialUrl}} target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="box-inline">
+            <h4 class="container"><i>Food</i></h4><br>
+            <img class="imgs-servizi" src="\img\pizza-slice.png"><br><br>
+            <div>
+                <ul>
                     <li *ngFor="let item of foodItems"><b>{{item.label}}</b>&nbsp;&nbsp;<a href={{item.mapsUrl}}
-                            target="_blank"><i class="fa-solid fa-location-dot"></i></a></li>
+                            target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+                        &nbsp;&nbsp;
+                        <a href={{item.socialUrl}} target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                    </li>
                 </ul>
             </div>
         </div>
