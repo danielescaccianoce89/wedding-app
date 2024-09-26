@@ -68,9 +68,9 @@
                 <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
                     <mat-form-field appearance="outline">
                         <mat-label class="label-custom"><i class="fa-solid fa-utensils"></i>&nbsp;Scegli il
-                            menù*</mat-label>
+                            menù</mat-label>
                         <mat-select name="menuSelected" (selectionChange)="onMenuSelectionChange(i, $event)" ngModel
-                            [required]="!guestsHasConfirmed[i]">
+                            [required]="guestsHasConfirmed[i] === true">
                             <mat-select-trigger>
                                 {{this.menuSelectedValueText[i]}}
                             </mat-select-trigger>
@@ -86,7 +86,7 @@
                             Allergie</mat-label>
                         <mat-select #allergySelection name="allergySelected" ngModel
                             (selectionChange)="checkVisibilityOtherAllergiesBox(i, $event)"
-                            [required]="!guestsHasConfirmed[i]" multiple>
+                            multiple>
                             <mat-select-trigger>
                                 <span *ngIf="(allergySelection.value.length || 0) >= 1"
                                     class="example-additional-selection">
@@ -128,7 +128,7 @@
                 <div *ngIf="formConfirm.value.childrenSelect === '1'"> -->
             <mat-form-field *ngIf="formConfirm.value.childrenSelection.areChildrenPresent === '1'" appearance="outline">
                 <mat-label>Numero bambini</mat-label>
-                <input name="childrenNumber" ngModel type="number" min="0" matInput value="0">
+                <input name="childrenNumber" ngModel type="number" min="0" matInput value="0" [required]="formConfirm.value.childrenSelection.areChildrenPresent === '1'">
             </mat-form-field>
             <!-- </div> -->
         </div>
