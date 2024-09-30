@@ -95,8 +95,8 @@ export class RsvpComponent implements OnInit {
     this.ngxLoader.start();
     this.guestNames = [];
     this.restService.getApi("/getGuestsByName?guestName=" + formData.value.guestName).subscribe(
-      (response) => {
-        this.guests = response;
+      (response: any) => {
+        this.guests = response.data;
         let i = 0;
         this.guests.forEach( (g:any) => {
           g.confirm === "Y" ? this.guestNames[i] = g.name + "&nbsp;&nbsp;<i class='fa-regular fa-circle-check'>" : this.guestNames[i] = g.name;  
@@ -119,10 +119,10 @@ export class RsvpComponent implements OnInit {
     this.guestsData = {};
     this.ngxLoader.start();
     this.restService.getApi("/getGuestsById?id=" + this.idGuestSelected).subscribe(
-      (response) => {
+      (response: any) => {
         debugger;
-        this.guestsSelected = response;
-        console.log('Data received:', response);
+        this.guestsSelected = response.data;
+        console.log('Data received:', response.data);
 
         if (stepNum !== -1) this.stepActive = stepNum;
         else console.log('button disabilitato');
@@ -160,9 +160,8 @@ export class RsvpComponent implements OnInit {
         this.restService
           .postApi('/updateGuestsPreferences', this.guestsData)
           .subscribe(
-            (response) => {
-              debugger;
-              console.log('Data received:', response);
+            (response: any) => {
+              console.log('Data received:', response.data);
               this.goToStep(0);
               this.ngxLoader.stop();
               Swal.fire({

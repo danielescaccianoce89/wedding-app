@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class RestService {
   
-  private apiUrl = 'http://wedding-app-api.eu-north-1.elasticbeanstalk.com/api'
+  // private apiUrl = 'http://wedding-app-api.eu-north-1.elasticbeanstalk.com/api'
+  private apiUrl = 'http://localhost:8080/api'
+
 
   constructor(private httpClient: HttpClient) {}
 
