@@ -42,15 +42,15 @@ export class RsvpComponent implements OnInit {
   allGuestsConfirmYes: boolean = false;
 
   ngOnInit(): void {
-    // Swal.fire({
-    //   title: 'Operazione riuscita',
-    //   text: 'La tua preferenza è stata salvata',
-    //   icon: 'success',
-    //   imageUrl: "/img/daniLo1.jpg",
-    //   imageWidth: "30vh",
-    //   imageHeight: "15vh",
-    //   imageAlt: "Dani&Lory"
-    // });
+    //  Swal.fire({
+    //    title: 'Operazione riuscita',
+    //    text: 'Grazie per la tua conferma',
+    //    icon: 'success',
+    //    imageUrl: "/img/vespetta.jpg",
+    //    imageWidth: "25vh",
+    //    imageHeight: "18vh",
+    //    imageAlt: "Dani&Lory"
+    //  });
     
   }
 
@@ -186,8 +186,12 @@ export class RsvpComponent implements OnInit {
               this.ngxLoader.stop();
               Swal.fire({
                 title: 'Operazione riuscita',
-                text: 'La tua preferenza è stata salvata',
+                text: 'Grazie per la tua conferma',
                 icon: 'success',
+                imageUrl: "/img/vespetta.jpg",
+                imageWidth: "25vh",
+                imageHeight: "18vh",
+                imageAlt: "Dani&Lory"
               });
             },
             (error) => {

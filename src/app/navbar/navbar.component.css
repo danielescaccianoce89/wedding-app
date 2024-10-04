@@ -56,6 +56,10 @@ nav {
     /* animation-iteration-count: infinite; */
 }
 
+img {
+    vertical-align: -8px;
+}
+
 @keyframes rotate {
     50%, 100% {
       transform: rotate(1turn);
