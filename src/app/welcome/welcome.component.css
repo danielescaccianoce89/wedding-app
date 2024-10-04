@@ -1,8 +1,8 @@
 .box-countdown {
     display: inline-block;
-    border: 2px solid;
+    /* border: 2px solid; */
     margin: 10px;
-    background-color: rgb(243, 217, 70);
+    /* background-color: rgb(240, 232, 188); */
     border-radius: 9px;
 }
 
@@ -20,3 +20,38 @@
 .padding-vertical {
     padding-top: 10px;
 }
+
+.smalltext {
+    font-size: 1em;
+}
+
+.box-element {
+    display: inline-block;
+    padding-right: 0.9em;
+    padding-left: 0.9em;
+    border-right: groove;
+}
+
+.flip {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.text-glow {
+    color: #ffffff; /* Testo bianco */
+    text-shadow: 0 0 10px red, 
+                 0 0 20px red, 
+                 0 0 30px rgba(0, 153, 255, 0.8); /* Ombra luminosa */
+  }
+  

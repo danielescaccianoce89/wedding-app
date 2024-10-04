@@ -9,21 +9,25 @@
 <div class="countdown center">
     <p class="center" style="margin-bottom: -1px;">Mancano esattamente</p>
     <div class="box-countdown">
-        <h4 class="days padding-vertical padding-horizontal" id="day">{{days}}</h4>
-        <h4 class="smalltext">&nbsp;Giorni&nbsp;</h4>
+        <div class="box-element">
+            <h4 class="days padding-vertical padding-horizontal text-glow">{{days}}</h4>
+            <h4 class="smalltext">&nbsp;giorni&nbsp;</h4>
+        </div>
+        <div class="box-element">
+            <h4 class="hours padding-vertical text-glow" id="hour">{{hours}}</h4>
+            <h4 class="smalltext">&nbsp;ore&nbsp;</h4>
+        </div>
+        <div class="box-element">
+            <h4 class="minutes padding-vertical text-glow" id="minute">{{minutes}}</h4>
+            <h4 class="smalltext">&nbsp;minuti&nbsp;</h4>
+        </div>
+        <div class="box-element">
+            <h4 class="seconds padding-vertical text-glow flip" id="second" #secondVal>{{seconds}}</h4>
+            <h4 class="smalltext">&nbsp;secondi&nbsp;</h4>
+        </div>
     </div>
-    <div class="box-countdown">
-        <h4 class="hours padding-vertical" id="hour">{{hours}}</h4>
-        <h4 class="smalltext">&nbsp;Ore&nbsp;</h4>
-    </div>
-    <div class="box-countdown">
-        <h4 class="minutes padding-vertical" id="minute">{{minutes}}</h4>
-        <h4 class="smalltext">&nbsp;Minuti&nbsp;</h4>
-    </div>
-    <div class="box-countdown">
-        <h4 class="seconds padding-vertical" id="second">{{seconds}}</h4>
-        <h4 class="smalltext">&nbsp;Secondi&nbsp;</h4>
-    </div><br>
-    <p class="center padding-horizontal">al nostro grande giorno. Non vediamo l'ora di condividere questo momento insieme a voi.</p>
+    <br>
+    <p class="center padding-horizontal">al nostro grande giorno. Non vediamo l'ora di condividere questo momento
+        insieme a voi.</p>
     <br>
 </div>

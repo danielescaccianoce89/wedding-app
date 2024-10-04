@@ -1,11 +1,11 @@
 <div class="form-container">
     <br>
-    <h2>RSVP&nbsp;<i class="fa-solid fa-user-check fa-lg"></i></h2>
+    <h2>Conferma la tua presenza&nbsp;<i class="fa-solid fa-user-check fa-lg"></i></h2>
     <br>
     <!--TEMPLATE DRIVEN FORM-->
     <form *ngIf="stepActive==0" #formGuest="ngForm" (ngSubmit)="searchGuests(formGuest, 1)">
         <div class="form-group col-md-4">
-            <input type="text" class="form-control" id="guestName" placeholder="Inserisci nome invitato"
+            <input type="text" class="form-control" id="guestName" placeholder="Inserisci qui il tuo nome"
                 name="guestName" ngModel required>
         </div><br>
         <button type="submit"

@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { AlertService } from '../servizi/alert.service';
 import { isPlatformServer } from '@angular/common';
 
@@ -8,6 +8,8 @@ import { isPlatformServer } from '@angular/common';
   styleUrl: './welcome.component.css'
 })
 export class WelcomeComponent {
+
+  @ViewChild('secondVal') secondVal!: ElementRef<any>;
 
   constructor(@Inject(PLATFORM_ID) private platform: Object) {}
 
@@ -25,10 +27,10 @@ export class WelcomeComponent {
   }
 
   countDown() {
-    let countDownDate = new Date("Jul 11, 2025 18:00:00").getTime();
+    let countDownDate = new Date("Jul 11, 2025 18:30:00").getTime();
 
     setInterval(() => {
-
+      this.secondVal.nativeElement.classList.remove('flip');
       let now = new Date().getTime();
       let distance = countDownDate - now;
     
@@ -37,7 +39,10 @@ export class WelcomeComponent {
       this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       this.seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+      this.secondVal.nativeElement.offsetWidth;
+      this.secondVal.nativeElement.classList.add('flip');
     }, 1000);
+    
   }
 
 }

@@ -42,6 +42,16 @@ export class RsvpComponent implements OnInit {
   allGuestsConfirmYes: boolean = false;
 
   ngOnInit(): void {
+    // Swal.fire({
+    //   title: 'Operazione riuscita',
+    //   text: 'La tua preferenza è stata salvata',
+    //   icon: 'success',
+    //   imageUrl: "/img/daniLo1.jpg",
+    //   imageWidth: "30vh",
+    //   imageHeight: "15vh",
+    //   imageAlt: "Dani&Lory"
+    // });
+    
   }
 
   toogleConfirmationGuest(idx: number, confirm: boolean) {
@@ -109,6 +119,11 @@ export class RsvpComponent implements OnInit {
       },
       (error) => {
         console.error('Error occurred:', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Qualcosa è andato storto. Contatta gli sposi."
+        });
         this.ngxLoader.stop();
       }
     );
@@ -131,6 +146,11 @@ export class RsvpComponent implements OnInit {
       },
       (error) => {
         console.error('Error occurred:', error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Qualcosa è andato storto. Contatta gli sposi."
+        });
         this.ngxLoader.stop();
       }
     );
@@ -172,6 +192,11 @@ export class RsvpComponent implements OnInit {
             },
             (error) => {
               console.error('Error occurred:', error);
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Qualcosa è andato storto. Contatta gli sposi."
+              });
               this.ngxLoader.stop();
             }
           );
