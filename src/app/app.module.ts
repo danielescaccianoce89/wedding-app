@@ -23,6 +23,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { RsvpComponent } from './rsvp/rsvp.component';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
     MainComponent,
     FaqComponent,
     CerimoniaComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
