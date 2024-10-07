@@ -4,7 +4,14 @@
     <h1>Daniele e Lorena</h1>
     <div><img src="/img/wedding-ring.png" style="height: 100px;" /></div><br>
     <h3>Venerdì 11 Luglio 2025</h3><br>
-    <div><img src="/img/lo_da_welcome.jpg" class="imgs-custom" /></div>
+    <!-- <div><img src="/img/lo_da_welcome.jpg" class="imgs-custom" /></div> -->
+    <owl-carousel-o class="custom-owl" [options]="customOptions">
+        <ng-container *ngFor="let slide of slidesStore">
+            <ng-template carouselSlide [id]="slide.id">
+                <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title" class="imgs-custom">
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
 </div>
 <br>
 <div class="countdown center">

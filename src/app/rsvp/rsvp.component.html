@@ -3,30 +3,39 @@
     <br>
     <!--TEMPLATE DRIVEN FORM-->
     <form *ngIf="stepActive==0" #formGuest="ngForm" (ngSubmit)="searchGuests(formGuest, 1)">
-        <div class="form-group col-md-4">
-            <input type="text" class="form-control" id="guestName" placeholder="Inserisci qui il tuo nome"
-                name="guestName" ngModel required>
-        </div><br>
-        <button type="submit"
-            [ngClass]="!formGuest.valid ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'"
-            [disabled]="!formGuest.valid">Ricerca&nbsp;&nbsp;<i class="bi bi-search"></i></button>
-    </form>
 
+        <h4 class="center">La vostra presenza è il regalo più gradito <img width="60" height="60"
+                src="/img/rsvp-guest.png" /></h4>
+        <br>
+        <p>Cerca il tuo nome e conferma la tua presenza entro il <b>10 giugno 2025</b>.</p>
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input style="text-align:center;" matInput type="text" name="guestName" ngModel #guestName="ngModel"
+                    required matTooltip="Inserisci il nome e l'iniziale del cognome (Es: Lorena L.)"
+                    matTooltipPosition="right" />
+                <mat-error *ngIf="formGuest.submitted && guestName.invalid">Il nome è richiesto</mat-error>
+            </mat-form-field>
+        </div>
+        <br>
+        <button type="submit" [ngClass]="'btn btn-primary enabled-custom'">Ricerca&nbsp;&nbsp;<i
+                class="bi bi-search"></i></button>
+    </form>
+    <!-- STEP 2 -->
     <div *ngIf="stepActive==1">
-        <p *ngIf="this.guestNames.length === 0; else otherTitle">Nessun ospite trovato. Si prega di riprovare.</p>
-        <ng-template #otherTitle>Seleziona il tuo nome</ng-template>
-        <div *ngFor="let guest of guests; let i = index" class="input-group-custom">
-            <div class="input-group-prepend guest-select">
-                <div class="input-group-text">
-                    <input [disabled]="guest.confirm" type="radio" name="guestSelected" value={{guest.id}}
-                        (change)="onGuestChecked($event)">
-                </div>
-            </div>
-            <div class="input-group-text text-guest-name"
-                (click)="guest.confirm === null ? selectCloserRadioBtn($event) : null" [innerHTML]="guestNames[i]"
-                [ngClass]="{'active' : guest.confirm === null}"></div>
-            <!-- <input (click)="selectCloserRadioBtn($event)" type="text" [disabled]="guest.confirm"
-                class="form-control input-text guest-select" value="{{guest.name}}" readonly> -->
+        <h4 *ngIf="this.guestNames.length === 0; else otherTitle">Nessun ospite trovato. Si prega di riprovare.</h4>
+        <ng-template #otherTitle>
+            <h4>Seleziona il tuo nome</h4>
+        </ng-template>
+        <br>
+        <div>
+            <mat-radio-group class="column-mat-radio-group">
+                <mat-radio-button class="column-mat-radio-button" *ngFor="let guest of guests; let i = index"
+                    name="guestSelected" [value]="guest.id" [disabled]="guest.confirm"
+                    (change)="onGuestChecked($event)">
+                    <span class="larger-span" [innerHTML]="guestNames[i]"></span>
+                </mat-radio-button>
+            </mat-radio-group>
         </div>
         <br>
         <button class="btn btn-primary btn-return" (click)="goToStep(0)"><i
@@ -36,40 +45,37 @@
             (click)="getGuestSelected(2)" [disabled]="!guestSelected">Continua&nbsp;&nbsp;<i
                 class="bi bi-check-circle"></i></button>
     </div>
-
+    <!-- STEP 3 -->
     <form *ngIf="stepActive==2" #formConfirm="ngForm" (ngSubmit)="saveGuestsData(formConfirm)">
         <!-- <pre>{{formConfirm.value | json }}</pre>  -->
-        <p *ngIf="guestsSelected.length > 1; else otherContent">Confermate la vostra presenza e le vostre preferenze:
-        </p>
-        <ng-template #otherContent>Conferma la tua presenza e la tua preferenza</ng-template>
+        <h4 *ngIf="guestsSelected.length > 1; else otherContent">Confermate la vostra presenza e le vostre preferenze:
+        </h4>
+        <ng-template #otherContent><h4>Conferma la tua presenza e la tua preferenza</h4></ng-template>
         <br>
         <div class="form-row" ngModelGroup="guestGroup">
             <div *ngFor="let guest of guestsSelected.peopleById; let i = index" class="form-row shadow"
                 ngModelGroup={{guest.id}}>
                 <div class="form-group row">
-                    <h3 name="name" [(ngModel)]="guest.name">{{guest.name}}</h3>
-                    <h3 name="id" [(ngModel)]="guest.id"></h3>
+                    <h4 name="name" [(ngModel)]="guest.name">{{guest.name}}</h4>
+                    <h4 name="id" [(ngModel)]="guest.id"></h4>
                 </div>
-                <div class="form-group row radioDiv">
-                    <div class="some-class" style="width:auto; text-align-last: left;">
-                        <label for="confirmSelection">Conferma presenza*</label>
-                    </div>
-                    <div class="some-class" style="width: auto; text-align-last: center;">
-                        <input type="radio" ngModel name="confirmSelection_{{guest.id}}" value="Y"
-                            (click)="toogleConfirmationGuest(i, true)" class="custom-control-input" required>
-                        <label for="selectionRadioSi">&nbsp;Si</label>
-                        <input type="radio" ngModel name="confirmSelection_{{guest.id}}" value="N"
-                            (click)="toogleConfirmationGuest(i, false)" class="custom-control-input"
-                            style="margin-left: 25px;" required>
-                        <label for="selectionRadioNo">&nbsp;No</label>
-                    </div>
+
+                <div>
+                    <label for="confirmSelection">Conferma presenza*</label>
+                    <mat-radio-group class="inline-radio-group" ngModel name="confirmSelection_{{guest.id}}" required>
+                        <mat-radio-button value="Y" (click)="toogleConfirmationGuest(i, true)">Si</mat-radio-button>
+                        <mat-radio-button value="N" (click)="toogleConfirmationGuest(i, false)">No</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-error *ngIf="formConfirm.submitted && guestsHasConfirmed[i] === undefined">
+                        Conferma obbligatoria!
+                    </mat-error>
                 </div>
                 <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
                     <mat-form-field appearance="outline">
                         <mat-label class="label-custom"><i class="fa-solid fa-utensils"></i>&nbsp;Scegli il
                             menù</mat-label>
                         <mat-select name="menuSelected" (selectionChange)="onMenuSelectionChange(i, $event)" ngModel
-                            [required]="guestsHasConfirmed[i] === true">
+                            [required]="guestsHasConfirmed[i] === true" #menuSelected="ngModel">
                             <mat-select-trigger>
                                 {{this.menuSelectedValueText[i]}}
                             </mat-select-trigger>
@@ -77,6 +83,9 @@
                             <mat-option value="2">Carne</mat-option>
                             <mat-option value="3">Vegetariano</mat-option>
                         </mat-select>
+                        <mat-error *ngIf="formConfirm.submitted && menuSelected.invalid">
+                            Scegli un menù!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div *ngIf="guestsHasConfirmed[i] === true" class="form-group row field">
@@ -84,8 +93,7 @@
                         <mat-label class="label-custom"><i class="fa-solid fa-syringe"></i>&nbsp;Eventuali
                             Allergie</mat-label>
                         <mat-select #allergySelection name="allergySelected" ngModel
-                            (selectionChange)="checkVisibilityOtherAllergiesBox(i, $event)"
-                            multiple>
+                            (selectionChange)="checkVisibilityOtherAllergiesBox(i, $event)" multiple>
                             <mat-select-trigger>
                                 <span *ngIf="(allergySelection.value.length || 0) >= 1"
                                     class="example-additional-selection">
@@ -110,7 +118,6 @@
         </div>
         <br>
         <div *ngIf="willAllGuestsBePresent() === true" class="form-row" ngModelGroup="childrenSelection">
-            <!-- <div *ngIf="guestsSelected.length > 1"> -->
             <mat-form-field *ngIf="guestsSelected.peopleById.length > 1" appearance="outline">
                 <mat-label class="label-custom"><i class="fa-solid fa-baby"></i>&nbsp;Bambini?</mat-label>
                 <mat-select name="areChildrenPresent" ngModel>
@@ -123,11 +130,15 @@
                     <mat-option value="2">No</mat-option>
                 </mat-select>
             </mat-form-field>&nbsp;&nbsp;
-            <!-- </div>
-                <div *ngIf="formConfirm.value.childrenSelect === '1'"> -->
             <mat-form-field *ngIf="formConfirm.value.childrenSelection.areChildrenPresent === '1'" appearance="outline">
                 <mat-label>Numero bambini</mat-label>
-                <input name="childrenNumber" ngModel type="number" min="0" matInput value="0" [required]="formConfirm.value.childrenSelection.areChildrenPresent === '1'">
+                <input name="childrenNumber" ngModel type="number" min="0" matInput value="0"
+                    [required]="formConfirm.value.childrenSelection.areChildrenPresent === '1'"
+                    #childrenNumber="ngModel">
+                <mat-error
+                    *ngIf="formConfirm.submitted && formConfirm.value.childrenSelection.areChildrenPresent === '1' && childrenNumber.invalid">
+                    Seleziona quanti mocciosi ci saranno!
+                </mat-error>
             </mat-form-field>
             <!-- </div> -->
         </div>
@@ -135,11 +146,13 @@
         <div class="form-row">
             <button type="button" class="btn btn-primary btn-return" (click)="goToStep(0)"><i
                     class="bi bi-arrow-left-circle"></i>&nbsp;&nbsp;Nuova ricerca</button>
-            <button type="submit"
-                [ngClass]="!guestSelected ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'"
-                [ngClass]="!formConfirm.valid ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'"
-                [disabled]="!formConfirm.valid">Continua&nbsp;&nbsp;<i class="bi bi-check-circle"></i></button>
+            <button type="submit" class="btn btn-primary enabled-custom">
+                Continua&nbsp;&nbsp;<i class="bi bi-check-circle"></i></button>
+
+            <!-- [ngClass]="!guestSelected ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'"
+                [ngClass]="!formConfirm.valid ? 'btn btn-primary disabled-custom' : 'btn btn-primary enabled-custom'" -->
         </div>
     </form>
+    <!-- -->
 </div>
 <ngx-ui-loader></ngx-ui-loader>

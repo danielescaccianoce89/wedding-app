@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { CerimoniaComponent } from './cerimonia/cerimonia.component';
 import { FaqComponent } from './faq/faq.component';
 import { MainComponent } from './main/main.component';
@@ -22,12 +22,21 @@ import { ServiziUtiliComponent } from './servizi-utili/servizi-utili.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RsvpComponent } from './rsvp/rsvp.component';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { RouterModule } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';  // Importa il modulo Tooltip di Material
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
-  declarations: [AppComponent,
+  declarations: [
+    AppComponent,
     WelcomeComponent,
     ServiziUtiliComponent,
     RsvpComponent,
@@ -36,23 +45,35 @@ import { FooterComponent } from './footer/footer.component';
     MainComponent,
     FaqComponent,
     CerimoniaComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatFormFieldModule,
     MatSelectModule,
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule, MatFormFieldModule, MatInputModule, MatIconModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
     NgxUiLoaderModule.forRoot({
       // Opzioni di configurazione opzionali
     }),
-    HttpClientModule // Aggiungi HttpClientModule agli imports
+    CarouselModule,
+    RouterModule,
+    MatTooltipModule,
+    MatRadioModule,
+    HttpClientModule, // Aggiungi HttpClientModule agli imports
   ],
-  providers: [provideClientHydration(), provideAnimationsAsync(), provideHttpClient(withFetch())], // Configura HttpClient per usare fetch],
+  providers: [
+    provideClientHydration(),
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
+  ], // Configura HttpClient per usare fetch],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

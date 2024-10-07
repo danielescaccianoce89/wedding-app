@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AlertService } from '../servizi/alert.service';
 import { RestService } from '../servizi/rest.service';
 import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
@@ -7,15 +7,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import e from 'express';
+import { MatTooltip } from '@angular/material/tooltip';
 
 declare var Swal: any; /* declare global variable fro SweetAlert usage */
 
 @Component({
   selector: 'app-rsvp',
   templateUrl: './rsvp.component.html',
-  styleUrl: './rsvp.component.css'
+  styleUrl: './rsvp.component.css',
 })
 export class RsvpComponent implements OnInit {
+  @ViewChild('guestNameInput', { read: MatTooltip }) tooltipName!: MatTooltip;
   [x: string]: any;
   data: any;
 
@@ -41,6 +43,8 @@ export class RsvpComponent implements OnInit {
   guestsData: any = {};
   allGuestsConfirmYes: boolean = false;
 
+  tooltipNameDisabled = true;
+
   ngOnInit(): void {
     //  Swal.fire({
     //    title: 'Operazione riuscita',
@@ -51,7 +55,6 @@ export class RsvpComponent implements OnInit {
     //    imageHeight: "18vh",
     //    imageAlt: "Dani&Lory"
     //  });
-    
   }
 
   toogleConfirmationGuest(idx: number, confirm: boolean) {
@@ -61,15 +64,13 @@ export class RsvpComponent implements OnInit {
   willAllGuestsBePresent() {
     debugger;
 
-    if(this.guestsHasConfirmed.length === 0)
-      return false;
+    if (this.guestsHasConfirmed.length === 0) return false;
     else {
-      for(let i=0; i < this.guestsHasConfirmed.length; i++) {
+      for (let i = 0; i < this.guestsHasConfirmed.length; i++) {
         if (this.guestsHasConfirmed[i] === true) return true;
       }
       return false;
     }
-   
   }
 
   onMenuSelectionChange(idx: number, ev: any) {
@@ -102,110 +103,131 @@ export class RsvpComponent implements OnInit {
   }
 
   searchGuests(formData: any, stepNum: number) {
-    this.ngxLoader.start();
-    this.guestNames = [];
-    this.restService.getApi("/getGuestsByName?guestName=" + formData.value.guestName).subscribe(
-      (response: any) => {
-        this.guests = response.data;
-        let i = 0;
-        this.guests.forEach( (g:any) => {
-          g.confirm === "Y" ? this.guestNames[i] = g.name + "&nbsp;&nbsp;<i class='fa-regular fa-circle-check'>" : this.guestNames[i] = g.name;  
-          i++;    
-        })
-        console.log(this.guestNames);
-        if (stepNum !== -1) this.stepActive = stepNum;
-        else console.log('button disabilitato');
-        this.ngxLoader.stop();
-      },
-      (error) => {
-        console.error('Error occurred:', error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Qualcosa è andato storto. Contatta gli sposi."
-        });
-        this.ngxLoader.stop();
-      }
-    );
+    debugger;
+    if (!formData.valid) {
+      console.log('FORM NON VALIDO');
+    } else {
+      console.log('FORM VALIDO');
+      this.ngxLoader.start();
+      this.guestNames = [];
+      this.restService
+        .getApi('/getGuestsByName?guestName=' + formData.value.guestName)
+        .subscribe(
+          (response: any) => {
+            this.guests = response.data;
+            let i = 0;
+            this.guests.forEach((g: any) => {
+              g.confirm === 'Y'
+                ? (this.guestNames[i] =
+                    g.name +
+                    "&nbsp;&nbsp;<i class='fa-regular fa-circle-check'>")
+                : (this.guestNames[i] = g.name);
+              i++;
+            });
+            console.log(this.guestNames);
+            if (stepNum !== -1) this.stepActive = stepNum;
+            else console.log('button disabilitato');
+            this.ngxLoader.stop();
+          },
+          (error) => {
+            console.error('Error occurred:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Qualcosa è andato storto. Contatta gli sposi.',
+            });
+            this.ngxLoader.stop();
+          }
+        );
+    }
   }
 
   getGuestSelected(stepNum: number) {
     this.guestsHasConfirmed = [];
     this.guestsData = {};
     this.ngxLoader.start();
-    this.restService.getApi("/getGuestsById?id=" + this.idGuestSelected).subscribe(
-      (response: any) => {
-        debugger;
-        this.guestsSelected = response.data;
-        console.log('Data received:', response.data);
+    this.restService
+      .getApi('/getGuestsById?id=' + this.idGuestSelected)
+      .subscribe(
+        (response: any) => {
+          debugger;
+          this.guestsSelected = response.data;
+          console.log('Data received:', response.data);
 
-        if (stepNum !== -1) this.stepActive = stepNum;
-        else console.log('button disabilitato');
+          if (stepNum !== -1) this.stepActive = stepNum;
+          else console.log('button disabilitato');
 
-        this.ngxLoader.stop();
-      },
-      (error) => {
-        console.error('Error occurred:', error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Qualcosa è andato storto. Contatta gli sposi."
-        });
-        this.ngxLoader.stop();
-      }
-    );
+          this.ngxLoader.stop();
+        },
+        (error) => {
+          console.error('Error occurred:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Qualcosa è andato storto. Contatta gli sposi.',
+          });
+          this.ngxLoader.stop();
+        }
+      );
   }
 
   saveGuestsData(formData: any) {
     debugger;
-    this.guestsData.guests = Object.values(formData.value.guestGroup);    
-    this.guestsData.idGuestFather = this.idGuestSelected; // id padre (racchiude una solo persona o coppie)
-    this.guestsData.childrenSelection = formData.value.childrenSelection;
-    this.guestsData.guests.forEach( (e:any) => {
-      e.allergySelected === "" ? e.allergySelected = [] : e.allergySelected;
-      (e.confirmSelection === undefined || e.confirmSelection === "") ?  e.confirmSelection = e['confirmSelection_' + e.id] : e.confirmSelection;
-    })
-    console.log(this.guestsData);
-    Swal.fire({
-      title: 'Sei sicuro?',
-      text: 'La tua preferenza non potrà essere più cambiata',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: 'blue',
-      cancelButtonColor: 'red',
-      confirmButtonText: 'Salva',
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        this.ngxLoader.start();
-        this.restService
-          .postApi('/updateGuestsPreferences', this.guestsData)
-          .subscribe(
-            (response: any) => {
-              console.log('Data received:', response.data);
-              this.goToStep(0);
-              this.ngxLoader.stop();
-              Swal.fire({
-                title: 'Operazione riuscita',
-                text: 'Grazie per la tua conferma',
-                icon: 'success',
-                imageUrl: "/img/vespetta.jpg",
-                imageWidth: "25vh",
-                imageHeight: "18vh",
-                imageAlt: "Dani&Lory"
-              });
-            },
-            (error) => {
-              console.error('Error occurred:', error);
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Qualcosa è andato storto. Contatta gli sposi."
-              });
-              this.ngxLoader.stop();
-            }
-          );
-      }
-    });
+
+    if (!formData.valid) {
+      console.log('FORM NON VALIDO');
+    } else {
+      this.guestsData.guests = Object.values(formData.value.guestGroup);
+      this.guestsData.idGuestFather = this.idGuestSelected; // id padre (racchiude una solo persona o coppie)
+      this.guestsData.childrenSelection = formData.value.childrenSelection;
+      this.guestsData.guests.forEach((e: any) => {
+        e.allergySelected === '' ? (e.allergySelected = []) : e.allergySelected;
+        e.confirmSelection === undefined || e.confirmSelection === ''
+          ? (e.confirmSelection = e['confirmSelection_' + e.id])
+          : e.confirmSelection;
+      });
+      console.log(this.guestsData);
+      Swal.fire({
+        title: 'Sei sicuro?',
+        text: 'La tua preferenza non potrà essere più cambiata',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'blue',
+        cancelButtonColor: 'red',
+        confirmButtonText: 'Salva',
+      }).then((result: any) => {
+        if (result.isConfirmed) {
+          this.ngxLoader.start();
+          this.restService
+            .postApi('/updateGuestsPreferences', this.guestsData)
+            .subscribe(
+              (response: any) => {
+                console.log('Data received:', response.data);
+                this.goToStep(0);
+                this.ngxLoader.stop();
+                Swal.fire({
+                  title: 'Operazione riuscita',
+                  text: 'Grazie per la tua conferma',
+                  icon: 'success',
+                  imageUrl: '/img/vespetta.jpg',
+                  imageWidth: '25vh',
+                  imageHeight: '18vh',
+                  imageAlt: 'Dani&Lory',
+                });
+              },
+              (error) => {
+                console.error('Error occurred:', error);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Qualcosa è andato storto. Contatta gli sposi.',
+                });
+                this.ngxLoader.stop();
+              }
+            );
+        }
+      });
+    }
   }
 
   goToStep(stepNum: number) {
@@ -214,17 +236,18 @@ export class RsvpComponent implements OnInit {
   }
 
   onGuestChecked(event: any) {
-    console.log(event.target.value);
+    debugger;
     this.guestSelected = true;
+    this.idGuestSelected = event.source.value;
   }
 
-  selectCloserRadioBtn(ev: any) {
-    let target =
-      ev.target.parentElement.childNodes[0].childNodes[0].childNodes[0];
-    target.checked = 'true';
-    this.idGuestSelected = target.value;
-    this.guestSelected = true;
+  // selectCloserRadioBtn(ev: any) {
+  //   let target =
+  //     ev.target.parentElement.childNodes[0].childNodes[0].childNodes[0];
+  //   target.checked = 'true';
+  //   this.idGuestSelected = target.value;
+  //   this.guestSelected = true;
 
-    console.log('idGuestSelected: ' + this.idGuestSelected);
-  }
+  //   console.log('idGuestSelected: ' + this.idGuestSelected);
+  // }
 }

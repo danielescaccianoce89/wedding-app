@@ -1,69 +1,72 @@
 .footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #e9c1c1;
+    color: #7a0e0e;
     padding: 20px 0;
-  }
-  
-  .footer-content {
+}
+
+.footer-content {
     display: flex;
-    flex-wrap: wrap; /* Permette il wrapping su schermi più piccoli */
+    flex-wrap: wrap;
+    /* Permette il wrapping su schermi più piccoli */
     justify-content: space-between;
     align-items: flex-start;
     padding: 0 10px;
     max-width: 1200px;
     margin: auto;
-  }
-  
-  .footer-section {
+}
+
+.footer-section {
     flex: 1;
     padding: 20px;
     min-width: 200px;
-  }
-  
-  .footer-section h2 {
+}
+
+.footer-section h2 {
     margin-bottom: 10px;
     font-size: 18px;
-  }
-  
-  .footer-section p, .footer-section ul, .footer-section .social-links {
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section .social-links {
     font-size: 14px;
-  }
-  
-  .footer-section ul {
+}
+
+.footer-section ul {
     list-style: none;
-  }
-  
-  .footer-section ul li {
+}
+
+.footer-section ul li {
     margin: 8px 0;
-  }
-  
-  .footer-section ul li a {
+}
+
+.footer-section ul li a {
     color: #fff;
     text-decoration: none;
-  }
-  
-  .footer-section ul li a:hover {
+}
+
+.footer-section ul li a:hover {
     text-decoration: underline;
-  }
-  
-  .footer-section .social-links a {
+}
+
+.footer-section .social-links a {
     margin-right: 10px;
     color: #fff;
     text-decoration: none;
-  }
-  
-  .footer-section .social-links a:hover {
+}
+
+.footer-section .social-links a:hover {
     color: #f9a825;
-  }
-  
-  .footer-bottom {
-    background-color: #222;
+}
+
+.footer-bottom {
+    background-color: #e9c1c1;
     text-align: center;
     padding: 10px 0;
     font-size: 14px;
-  }
-  
-  .footer-bottom a {
+}
+
+.footer-bottom a {
     color: #f9a825;
     text-decoration: none;
-  }
+}

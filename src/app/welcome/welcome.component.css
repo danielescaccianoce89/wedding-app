@@ -29,7 +29,7 @@
     display: inline-block;
     padding-right: 0.9em;
     padding-left: 0.9em;
-    border-right: groove;
+    border-right: ridge;
 }
 
 .flip {
@@ -55,3 +55,8 @@
                  0 0 30px rgba(0, 153, 255, 0.8); /* Ombra luminosa */
   }
   
+/* carousel */
+.imgs-custom {
+  display: unset !important;
+  width: auto !important;
+}
