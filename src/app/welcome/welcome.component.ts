@@ -22,7 +22,7 @@ export class WelcomeComponent {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    dots: true,
+    dots: false,
     navSpeed: 50,
     //navText: ["<img src='/img/carousel/back.png' class='arrow-img'/>", "<img src='/img/carousel/next.png' class='arrow-img'/>"],
     responsive: {

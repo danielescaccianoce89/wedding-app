@@ -7,14 +7,14 @@
         <h4 class="center">La vostra presenza è il regalo più gradito <img width="60" height="60"
                 src="/img/rsvp-guest.png" /></h4>
         <br>
-        <p>Cerca il tuo nome e conferma la tua presenza entro il <b>10 giugno 2025</b>.</p>
+        <p style="display: inline-block; font-weight: bold;">Cerca il tuo nome e conferma la tua presenza entro il <b>10 giugno 2025</b>.</p>
         <div>
             <mat-form-field appearance="outline">
                 <mat-label>Nome</mat-label>
                 <input style="text-align:center;" matInput type="text" name="guestName" ngModel #guestName="ngModel"
                     required matTooltip="Inserisci il nome e l'iniziale del cognome (Es: Lorena L.)"
-                    matTooltipPosition="right" />
-                <mat-error *ngIf="formGuest.submitted && guestName.invalid">Il nome è richiesto</mat-error>
+                    matTooltipPosition="right" matTooltipClass="tooltip-custom"/>
+                <mat-error *ngIf="formGuest.submitted && guestName.invalid">Nome obbligatorio!</mat-error>
             </mat-form-field>
         </div>
         <br>
@@ -84,7 +84,7 @@
                             <mat-option value="3">Vegetariano</mat-option>
                         </mat-select>
                         <mat-error *ngIf="formConfirm.submitted && menuSelected.invalid">
-                            Scegli un menù!
+                            Scelta del menù obbligatoria!
                         </mat-error>
                     </mat-form-field>
                 </div>

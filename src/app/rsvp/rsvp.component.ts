@@ -14,7 +14,7 @@ declare var Swal: any; /* declare global variable fro SweetAlert usage */
 @Component({
   selector: 'app-rsvp',
   templateUrl: './rsvp.component.html',
-  styleUrl: './rsvp.component.css',
+  styleUrl: './rsvp.component.css'
 })
 export class RsvpComponent implements OnInit {
   @ViewChild('guestNameInput', { read: MatTooltip }) tooltipName!: MatTooltip;

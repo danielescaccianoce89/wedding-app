@@ -2,12 +2,14 @@
     background-color: #e9c1c1;
     color: #7a0e0e;
     padding: 20px 0;
+    /* position: fixed;
+    width: -webkit-fill-available; */
+    bottom: 0;
 }
 
 .footer-content {
     display: flex;
     flex-wrap: wrap;
-    /* Permette il wrapping su schermi più piccoli */
     justify-content: space-between;
     align-items: flex-start;
     padding: 0 10px;
