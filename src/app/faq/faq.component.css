@@ -16,3 +16,7 @@ ul {
 .icon-color {
     color: royalblue;
 }
+
+h3 {
+    text-shadow: 2px 2px 5px rgba(117, 115, 103, 0.404);
+}

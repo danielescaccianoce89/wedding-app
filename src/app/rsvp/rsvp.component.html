@@ -4,10 +4,10 @@
     <!--TEMPLATE DRIVEN FORM-->
     <form *ngIf="stepActive==0" #formGuest="ngForm" (ngSubmit)="searchGuests(formGuest, 1)">
 
-        <h4 class="center">La vostra presenza è il regalo più gradito <img width="60" height="60"
+        <h4 class="center shadow-custom">La vostra presenza è il regalo più gradito <img width="60" height="60"
                 src="/img/rsvp-guest.png" /></h4>
         <br>
-        <p style="display: inline-block; font-weight: bold;">Cerca il tuo nome e conferma la tua presenza entro il <b>10 giugno 2025</b>.</p>
+        <p style="display: inline-block;">Cerca il tuo nome e conferma la tua presenza entro il <b>10 giugno 2025</b>.</p>
         <div>
             <mat-form-field appearance="outline">
                 <mat-label>Nome</mat-label>

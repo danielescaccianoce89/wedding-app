@@ -8,6 +8,8 @@ body {
     font-weight: 5000;
     font-style: normal;
     font-variation-settings: "wdth" 100;
+    /* background-image: url('/img/white-paper-texture-background.jpg'); */
+    background-size: cover;
     background-color: whitesmoke;
 }
 
@@ -18,6 +20,8 @@ h3 {
 .center {
     text-align-last: center;
     text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .imgs-custom {
@@ -41,13 +45,13 @@ h3 {
     background: none !important;
 }
 
-footer {
-    height: 80px;
-}
-
 .main-content {
     /* margin-bottom: 30px; */
     min-height: 100vh;
     /* background-image: url('/img/bck-1.jpg'); */
-    background-size: cover;
+   
+}
+
+.shadow-custom {
+    text-shadow: 2px 2px 5px rgba(117, 115, 103, 0.404);
 }

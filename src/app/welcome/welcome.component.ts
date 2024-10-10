@@ -53,7 +53,7 @@ export class WelcomeComponent {
     { id: '3', src: '/img/carousel/3.jpg', title: 'Slide 1', alt: '1' },
     { id: '4', src: '/img/carousel/4.jpg', title: 'Slide 1', alt: '1' },
     { id: '5', src: '/img/carousel/5.jpg', title: 'Slide 1', alt: '1' },
-    { id: '6', src: '/img/carousel/6.jpg', title: 'Slide 1', alt: '1' },
+    { id: '6', src: '/img/carousel/6.jpeg', title: 'Slide 1', alt: '1' },
     { id: '7', src: '/img/carousel/7.jpg', title: 'Slide 1', alt: '1' },
     { id: '8', src: '/img/carousel/8.jpg', title: 'Slide 1', alt: '1' },
     { id: '9', src: '/img/carousel/9.jpg', title: 'Slide 1', alt: '1' },
@@ -67,7 +67,8 @@ export class WelcomeComponent {
     { id: '17', src: '/img/carousel/17.jpeg', title: 'Slide 1', alt: '1' },
     { id: '18', src: '/img/carousel/18.jpeg', title: 'Slide 1', alt: '1' },
     { id: '19', src: '/img/carousel/19.jpeg', title: 'Slide 1', alt: '1' },
-    { id: '20', src: '/img/carousel/20.jpeg', title: 'Slide 1', alt: '1' }
+    { id: '20', src: '/img/carousel/20.jpg', title: 'Slide 1', alt: '1' },
+    { id: '21', src: '/img/carousel/21.jpeg', title: 'Slide 1', alt: '1' }
   ];
 
   constructor(@Inject(PLATFORM_ID) private platform: Object) {}
