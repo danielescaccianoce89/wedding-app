@@ -163,11 +163,5 @@ mat-error {
 
 .inline-radio-button {
     display: inline-block !important;
-    /* Imposta ogni radio button come inline-block */
     margin-right: 15px !important;
-    /* Spazio tra i radio button */
 }
-
-/* .mat-mdc-text-field-wrapper mdc-text-field mdc-text-field--outlined {
-    background-color: white !important;
-} */

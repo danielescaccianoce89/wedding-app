@@ -31,6 +31,10 @@
     padding-left: 0.9em;
 }
 
+/* .box-element-separator {
+  display: inline-block;
+} */
+
 .flip {
     animation: pulse 2s infinite;
 }

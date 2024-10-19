@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from '../servizi/alert.service';
 import { RestService } from '../servizi/rest.service';
 import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
